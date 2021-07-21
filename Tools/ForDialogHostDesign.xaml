@@ -1,0 +1,27 @@
+﻿<Window x:Class="FishRandomSelector.ForDialogHostDesign"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FishRandomSelector"
+        mc:Ignorable="d"
+        Title="ForDialogHostDesign" Height="450" Width="800"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+    <Grid>
+        <materialDesign:Snackbar
+            x:Name="SnackbarFive"
+            HorizontalAlignment="Stretch"
+            IsActive="True" Grid.Column="2" Margin="0,0,0.333,-0.333" Grid.Row="2">
+            <materialDesign:SnackbarMessage
+                Content="This Snackbar is stretched horizontally. Consider allowing your content to push up."
+                ActionContent="OK" Height="42" />
+        </materialDesign:Snackbar>
+    </Grid>
+</Window>

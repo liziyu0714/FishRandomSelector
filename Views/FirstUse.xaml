@@ -1,0 +1,69 @@
+﻿<Window x:Class="FishRandomSelector.Views.FirstUse"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FishRandomSelector.Views"
+        mc:Ignorable="d"
+        Title="首次使用FishRandomSelector" Height="450" Width="800" 
+        WindowStartupLocation="CenterScreen" WindowStyle="None"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+    <Grid>
+        <materialDesign:Transitioner
+            SelectedIndex="0"
+            AutoApplyTransitionOrigins="True">
+            <materialDesign:Transitioner.InputBindings>
+                <KeyBinding
+                    Key="Left"
+                    Command="{x:Static materialDesign:Transitioner.MovePreviousCommand}" />
+                <KeyBinding
+                    Key="Right"
+                    Command="{x:Static materialDesign:Transitioner.MoveNextCommand}" />
+            </materialDesign:Transitioner.InputBindings>
+            <materialDesign:TransitionerSlide
+                OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
+                <Grid>
+                    <Viewbox Width="400" Height="100" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,60,0,0">
+                        <TextBlock>别来无恙啊！</TextBlock>
+                    </Viewbox>
+                    <Viewbox Width="500" Height="50" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,160,0,0">
+                        <TextBlock>欢迎使用FishRandomSelector</TextBlock>
+                    </Viewbox>
+                    <Button
+                        Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                        Command="{x:Static materialDesign:Transitioner.MoveNextCommand}" Margin="0,20,0,0"
+                        Click="DoFirstUseWorks">
+                        <materialDesign:PackIcon Kind="ChevronRight">
+
+                        </materialDesign:PackIcon>
+                    </Button>
+                </Grid>
+            </materialDesign:TransitionerSlide>
+            <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}"  >
+                <Grid>
+                    <Viewbox Width="400" Height="100" VerticalAlignment="Top" Margin="0,50,0,0">
+                        <TextBlock>正在配置第一次使用的文件...</TextBlock>
+                    </Viewbox>
+                    <ProgressBar
+            Height="10"
+            IsIndeterminate="True" VerticalAlignment="Bottom" Margin="0,0,0,10" Background="{x:Null}" BorderBrush="{x:Null}" />
+                    <Button IsEnabled="False" x:Name="Page2NextButton"
+                        Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                        Command="{x:Static materialDesign:Transitioner.MoveNextCommand}" Margin="0,20,0,0">
+                        <materialDesign:PackIcon Kind="ChevronRight">
+
+                        </materialDesign:PackIcon>
+                    </Button>
+                </Grid>
+            </materialDesign:TransitionerSlide>
+        </materialDesign:Transitioner>
+        
+    </Grid>
+</Window>

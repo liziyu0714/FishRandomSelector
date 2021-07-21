@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="MigrationBackup\**" />
+    <Compile Remove="temp\**" />
+    <Compile Remove="ziyuan\**" />
+    <EmbeddedResource Remove="MigrationBackup\**" />
+    <EmbeddedResource Remove="temp\**" />
+    <EmbeddedResource Remove="ziyuan\**" />
+    <None Remove="MigrationBackup\**" />
+    <None Remove="temp\**" />
+    <None Remove="ziyuan\**" />
+    <Page Remove="MigrationBackup\**" />
+    <Page Remove="temp\**" />
+    <Page Remove="ziyuan\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove=".gitattributes" />
+    <None Remove=".gitignore" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MahApps.Metro.IconPacks.MaterialDesign" Version="4.8.0" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.1.0" />
+    <PackageReference Include="runtime.win-x64.Microsoft.NETCore.App" Version="2.2.8" />
+  </ItemGroup>
+
+</Project>

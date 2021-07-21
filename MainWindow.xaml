@@ -1,0 +1,145 @@
+﻿<Window x:Class="FishRandomSelector.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FishRandomSelector"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="MainWindow" Height="450" Width="800" Loaded="MainWindowLoaded" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="0"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="LeftArea" Width="0"/>
+            <ColumnDefinition Width="Auto">
+            </ColumnDefinition>
+            <ColumnDefinition Width="9*"/>
+        </Grid.ColumnDefinitions>
+        <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Width="10 " HorizontalAlignment="Center" ShowsPreview="False"/>
+        <materialDesign:DialogHost IsOpen="False" x:Name="VerifyDialog" Grid.ColumnSpan="2" Grid.RowSpan="3">
+            <materialDesign:DialogHost.DialogContent>
+                <Grid Height="100" Width="200">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}" Value="35" IsIndeterminate="True" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" />
+                    <Viewbox Grid.Row="1">
+                        <TextBlock>正在验证</TextBlock>
+                    </Viewbox>
+                </Grid>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+        <materialDesign:DialogHost IsOpen="False" x:Name="VerifyfailedDialog" Grid.ColumnSpan="2" Grid.RowSpan="3">
+            <materialDesign:DialogHost.DialogContent>
+                <Grid Height="200" Width="200">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Button x:Name="VerifyfailedButton" Grid.Row="1" Style="{StaticResource MaterialDesignRaisedLightButton}" ToolTip="点击此按钮将关闭FishRandomselector" Content="确定" Click="VerifyfailedButton_Click" />
+                    <Viewbox Grid.Row="0">
+                        <TextBlock>验证失败</TextBlock>
+                    </Viewbox>
+                </Grid>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+        <materialDesign:Card Grid.Row="0" Grid.Column="2" Background="#03a9f4" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Padding="0" Grid.RowSpan="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Viewbox Grid.Row="0"  Margin="16 16 16 4">
+                    <TextBlock  Style="{StaticResource MaterialDesignHeadline5TextBlock}" Text="..." />
+                </Viewbox>
+
+                <Separator Grid.Row="1" Style="{StaticResource MaterialDesignLightSeparator}" />
+                <Viewbox Grid.Row="2" Margin="16 0 16 8" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <TextBlock  Style="{StaticResource MaterialDesignBody2TextBlock}" Text="FishRandomSelector" />
+                </Viewbox>
+
+                <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="16 0 16 8" HorizontalAlignment="Right">
+
+                    <materialDesign:PopupBox HorizontalAlignment="Right" Padding="2 0 2 0">
+                        <StackPanel>
+                            <Button Content="提高概率" />
+                            <Button Content="降低概率" />
+                        </StackPanel>
+                    </materialDesign:PopupBox>
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
+        <materialDesign:ColorZone
+            Mode="PrimaryDark"
+            Padding="16"
+            CornerRadius="10"
+            materialDesign:ShadowAssist.ShadowDepth="Depth3"
+            ClipToBounds="False" Margin="0,0,0,-22" VerticalAlignment="Stretch" d:LayoutOverrides="Height">
+            <StackPanel
+                Orientation="Horizontal">
+                <ToggleButton x:Name="OpenLeftAreaButton" Style="{DynamicResource MaterialDesignHamburgerToggleButton}" Click="OpenLeftAreaButton_Click">
+
+                </ToggleButton>
+                <TextBlock
+                        VerticalAlignment="Center"
+                        Margin="16 0 0 0"
+                        Text="FishRandomSelector" />
+            </StackPanel>
+        </materialDesign:ColorZone>
+
+        <Grid x:Name="grid" Grid.Column="2" Grid.Row="2" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+
+            <Button x:Name="SelectButton"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                materialDesign:ButtonProgressAssist.Value="-1"
+                materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                 
+                Grid.Column="1"  VerticalAlignment="Center" Height="70" Cursor="Hand" Click="SelectButton_Click"   >
+                <Viewbox>
+                    <TextBlock>抽取</TextBlock>
+                </Viewbox>
+            </Button>
+            <Button Grid.Column="0"
+                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Width="60" Height="60" >
+                <materialDesign:PackIcon
+                    Kind="ArrowLeft" Height="40" Width="40"
+                 />
+            </Button>
+            <Button Grid.Column="2"
+                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Width="60" Height="60" >
+                <materialDesign:PackIcon
+                    Kind="ArrowRight" Height="40" Width="40"
+                 />
+            </Button>
+        </Grid>
+        <materialDesign:Snackbar
+            x:Name="SnackbarFive"
+            HorizontalAlignment="Stretch"
+            IsActive="True" Grid.Column="2" Margin="0,0,0.333,-0.333" Grid.Row="2">
+            <materialDesign:SnackbarMessage
+                Content="This Snackbar is stretched horizontally. Consider allowing your content to push up."
+                ActionContent="OK" Height="42" />
+        </materialDesign:Snackbar>
+    </Grid>
+</Window>
