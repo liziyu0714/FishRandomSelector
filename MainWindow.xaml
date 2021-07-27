@@ -133,13 +133,6 @@
                  />
             </Button>
         </Grid>
-        <materialDesign:Snackbar
-            x:Name="SnackbarFive"
-            HorizontalAlignment="Stretch"
-            IsActive="True" Grid.Column="2" Margin="0,0,0.333,-0.333" Grid.Row="2">
-            <materialDesign:SnackbarMessage
-                Content="This Snackbar is stretched horizontally. Consider allowing your content to push up."
-                ActionContent="OK" Height="42" />
-        </materialDesign:Snackbar>
+        
     </Grid>
 </Window>
