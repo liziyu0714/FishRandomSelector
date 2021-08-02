@@ -11,8 +11,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 using System.Xml;
 using FishRandomSelector.Tools;
+using System.IO;
 
 namespace FishRandomSelector.Views
 {
@@ -48,6 +50,42 @@ namespace FishRandomSelector.Views
             FishXmlWriter.AppendAttributeToElement((XmlElement)node, "name", name);
             FishXmlWriter.AppendAttributeToElement((XmlElement)node, "value", value);
             FishXmlWriter.AppendChild(root, node);
+        }
+        private void GenerosDefaultNameList()
+        {
+
+        }
+
+        private void PickFile(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.DefaultExt = ".txt";
+            fileDialog.Filter = "文本文件 |*.txt|无类型文本 |*.*|Fish名称名单 |*.fnamelist";
+            fileDialog.CheckFileExists = true;
+            fileDialog.Multiselect = false;
+            Nullable<bool> result = fileDialog.ShowDialog();
+            if (result == true)
+            {
+                NextButton.IsEnabled = true;
+                Filepath.Text = fileDialog.FileName.ToString();
+                FileStream file = null ;
+                StreamReader filereader = null ;
+                try
+                {
+                    file = new FileStream(fileDialog.FileName.ToString(), FileMode.Open);
+                    filereader = new StreamReader(file);
+                    filecontext.Text = filereader.ReadToEnd();
+                }
+                catch(Exception ex)
+                {
+                    filecontext.Text = ex.Message;
+                }
+                finally
+                {
+                    filereader?.Close();
+                    file?.Close();
+                }
+            }
         }
     }
 }

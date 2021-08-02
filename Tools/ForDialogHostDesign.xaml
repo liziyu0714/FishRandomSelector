@@ -14,14 +14,23 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}">
-    <Grid>
-        <materialDesign:Snackbar
-            x:Name="SnackbarFive"
-            HorizontalAlignment="Stretch"
-            IsActive="True" Grid.Column="2" Margin="0,0,0.333,-0.333" Grid.Row="2">
-            <materialDesign:SnackbarMessage
-                Content="This Snackbar is stretched horizontally. Consider allowing your content to push up."
-                ActionContent="OK" Height="42" />
-        </materialDesign:Snackbar>
+    <Grid VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="导入名单" Grid.Row="0" FontSize="72" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
+        <TextBlock Text="你可以使用本地文件，将名字用空格分开；或使用.fnamelist文件导入" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24"></TextBlock>
+        <Button Content="点击选择文件..." Grid.Row="2" Width="160" HorizontalAlignment="Left"></Button>
+        <TextBox Text="..." Grid.Row="1" HorizontalAlignment="Left" Margin="165,29,0,0" Grid.RowSpan="2" Width="635" FontSize="24"></TextBox>
+        <TextBox Grid.Row="3" x:Name="textBox" Text="" TextWrapping="Wrap" Width="320" Height="262" HorizontalAlignment="Left" Cursor="IBeam" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" BorderThickness="10,10,10,10"/>
+        <Button
+            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+            Command="{x:Static materialDesign:Transitioner.MoveNextCommand}" Margin="0,20,0,0"
+            Grid.Row="3">
+            <materialDesign:PackIcon Kind="ChevronRight" />
+        </Button>
     </Grid>
 </Window>
