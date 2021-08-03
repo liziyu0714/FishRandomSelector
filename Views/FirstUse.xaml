@@ -80,9 +80,10 @@
                         x:Name="NextButton"
                         Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                         Command="{x:Static materialDesign:Transitioner.MoveNextCommand}" Margin="0,20,0,0"
-                        Click="DoFirstUseWorks"
+                        Click="PutName"
                         IsEnabled="false"
-                        Grid.Row="3">
+                        Grid.Row="3"
+                        ToolTip="点击此按钮后，将会导入名单" Cursor="Hand">
                         <materialDesign:PackIcon Kind="ChevronRight" />
                     </Button>
                 </Grid>

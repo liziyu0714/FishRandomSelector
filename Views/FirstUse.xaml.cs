@@ -39,9 +39,9 @@ namespace FishRandomSelector.Views
         {
             Thread.Sleep(1000);
             XmlElement root = FishXmlWriter.CreateRootElement("FishRandomSelectorConfig");
-            AddAttribute(root, "Testname", "Testvalue");
             FishXmlWriter.CreateXmlDeclaration("1.0", "UTF-8", null);
             FishXmlWriter.SavaXml("FishRandomSelector.xml");
+            FishXmlWriter.ClearXml();
             Page2NextButton.Dispatcher.Invoke(() => { Page2NextButton.IsEnabled = true; });
         }
         private void AddAttribute(XmlElement root, string name, string value)
@@ -51,11 +51,6 @@ namespace FishRandomSelector.Views
             FishXmlWriter.AppendAttributeToElement((XmlElement)node, "value", value);
             FishXmlWriter.AppendChild(root, node);
         }
-        private void GenerosDefaultNameList()
-        {
-
-        }
-
         private void PickFile(object sender, RoutedEventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
@@ -86,6 +81,33 @@ namespace FishRandomSelector.Views
                     file?.Close();
                 }
             }
+        }
+        private void PutNameList()
+        {
+            string namelist = null;
+            filecontext.Dispatcher.Invoke(() => { namelist =(string) filecontext.Text.ToString().Clone(); });
+            string[] names = namelist.Split(new char[2] { ' ','\n' });
+            XmlElement root = FishXmlWriter.CreateRootElement("FishRandomSelectorNameList");
+            FishXmlWriter.CreateXmlDeclaration("1.0", "UTF-8", null);
+            foreach(string name in names)
+            {
+                if(name!=null)
+                {
+                    PutAName(name, root);
+                }
+            }
+        }
+        private void PutAName(string name , XmlElement root)
+        {
+            XmlNode aname = FishXmlWriter.CreateElement("Name", "");
+            FishXmlWriter.AppendAttributeToElement((XmlElement)aname, "name", name);
+            FishXmlWriter.AppendChild(root, aname);
+            FishXmlWriter.SavaXml("FishRandomSelectorNameList.xml");
+        }
+
+        private void PutName(object sender, RoutedEventArgs e)
+        {
+            PutNameList();
         }
     }
 }

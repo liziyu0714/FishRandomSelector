@@ -10,7 +10,13 @@ namespace FishRandomSelector.Tools
     public class FishXmlWriter
     {
         static XmlDocument doc = new XmlDocument();
-
+        /// <summary>
+        /// 清空文档
+        /// </summary>
+        public static void ClearXml()
+        {
+            doc = new XmlDocument();
+        }
         /// <summary>
         /// 创建根节点
         /// </summary>
