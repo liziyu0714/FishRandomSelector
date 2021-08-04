@@ -31,8 +31,8 @@ namespace FishRandomSelector.Views
         private void LoadWindow_OtherThread()
         {
             #region 检测是否是第一次使用
-            if(!System.IO.File.Exists("FishRandomSelector.xml"))
-            {
+            //if(!System.IO.File.Exists("FishRandomSelector.xml"))
+            //{
                 this.Dispatcher.Invoke(() =>
                 {
                     FirstUse firstUse = new FirstUse();
@@ -40,7 +40,7 @@ namespace FishRandomSelector.Views
                     Application.Current.MainWindow.Show();
                     this.Close();
                 });
-            }
+            //}
             #endregion
             LoadInfo.Dispatcher.Invoke(() => { LoadInfo.Text = "正在验证应用可用性..."; });
             #region 验证应用可用性

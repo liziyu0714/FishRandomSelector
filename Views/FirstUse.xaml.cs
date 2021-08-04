@@ -26,6 +26,8 @@ namespace FishRandomSelector.Views
         public FirstUse()
         {
             InitializeComponent();
+            LICENSE.Text = Info.Info.GetLicense();
+            EULA.Text = Info.Info.GetEULA();
         }
 
         
@@ -103,11 +105,15 @@ namespace FishRandomSelector.Views
             FishXmlWriter.AppendAttributeToElement((XmlElement)aname, "name", name);
             FishXmlWriter.AppendChild(root, aname);
             FishXmlWriter.SavaXml("FishRandomSelectorNameList.xml");
+            FishXmlWriter.ClearXml();
         }
 
         private void PutName(object sender, RoutedEventArgs e)
         {
-            PutNameList();
+            if (filecontext.Text != "")
+                PutNameList();
+            else
+                MessageBox.Show(this,"请选择文件或手动输入","FishRandomSelector",MessageBoxButton.OK,MessageBoxImage.Warning);
         }
     }
 }
