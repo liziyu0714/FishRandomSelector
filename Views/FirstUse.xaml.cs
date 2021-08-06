@@ -26,8 +26,10 @@ namespace FishRandomSelector.Views
         public FirstUse()
         {
             InitializeComponent();
-            LICENSE.Text = Info.Info.GetLicense();
-            EULA.Text = Info.Info.GetEULA();
+            LICENSE.MaxWidth /= 2;
+            EULA.MaxWidth /= 2;
+            LICENSE.Text = Info.Info.LICENSE;
+            EULA.Text = Info.Info.EULA;
         }
 
         
@@ -39,7 +41,6 @@ namespace FishRandomSelector.Views
         }
         private void DoWork_OtherThread()
         {
-            Thread.Sleep(1000);
             XmlElement root = FishXmlWriter.CreateRootElement("FishRandomSelectorConfig");
             FishXmlWriter.CreateXmlDeclaration("1.0", "UTF-8", null);
             FishXmlWriter.SavaXml("FishRandomSelector.xml");
@@ -98,14 +99,15 @@ namespace FishRandomSelector.Views
                     PutAName(name, root);
                 }
             }
+            FishXmlWriter.SavaXml("FishRandomSelectorNameList.xml");
+            FishXmlWriter.ClearXml();
         }
         private void PutAName(string name , XmlElement root)
         {
             XmlNode aname = FishXmlWriter.CreateElement("Name", "");
             FishXmlWriter.AppendAttributeToElement((XmlElement)aname, "name", name);
+            FishXmlWriter.AppendAttributeToElement((XmlElement)aname, "value", "50");
             FishXmlWriter.AppendChild(root, aname);
-            FishXmlWriter.SavaXml("FishRandomSelectorNameList.xml");
-            FishXmlWriter.ClearXml();
         }
 
         private void PutName(object sender, RoutedEventArgs e)

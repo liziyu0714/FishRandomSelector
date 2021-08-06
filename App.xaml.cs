@@ -13,5 +13,6 @@ namespace FishRandomSelector
     /// </summary>
     public partial class App : Application
     {
+        public bool IsConfigFirstUse = false;
     }
 }

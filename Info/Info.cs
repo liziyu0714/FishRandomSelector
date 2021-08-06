@@ -9,12 +9,12 @@ using System.Windows;
 
 namespace FishRandomSelector.Info
 {
-    static class Info
+    partial class Info
     {
         public static string Version = "1.0.0.0";
         public static string Productname = "FishRandomSelector1.0";
         public static string VerifyLink = @"http://www.liziyu0714.tk/Fish/FishRandomSelector/FishRandomSelector1.0";
-        public static string GetLicense ()
+        public static string GetLicenseByUnmanagedMemoryStream()
         {
             byte[] LicenseText_byte = new byte[100 * 1024 * 1024];
             string LicenseText = null;
@@ -30,7 +30,7 @@ namespace FishRandomSelector.Info
             LicenseText = System.Text.Encoding.UTF8.GetString(LicenseText_byte);
             return LicenseText;
         }
-        public static string GetEULA()
+        public static string GetEULAByUnmanagedMemoryStream()
         {
             byte[] EULAText_byte = new byte[100 * 1024 * 1024];
             string EULAText = null;
@@ -46,5 +46,6 @@ namespace FishRandomSelector.Info
             EULAText = System.Text.Encoding.UTF8.GetString(EULAText_byte);
             return EULAText;
         }
+        
     }
 }

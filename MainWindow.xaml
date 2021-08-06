@@ -27,6 +27,7 @@
             </ColumnDefinition>
             <ColumnDefinition Width="9*"/>
         </Grid.ColumnDefinitions>
+        <Frame Source="/Views/PeopleView.xaml" Grid.Column="0" Grid.RowSpan="4"></Frame>
         <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Width="10 " HorizontalAlignment="Center" ShowsPreview="False"/>
         <materialDesign:DialogHost IsOpen="False" x:Name="VerifyDialog" Grid.ColumnSpan="2" Grid.RowSpan="3">
             <materialDesign:DialogHost.DialogContent>

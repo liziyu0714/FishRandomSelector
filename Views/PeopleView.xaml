@@ -1,0 +1,55 @@
+﻿<Page x:Class="FishRandomSelector.core.Views.PeopleView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FishRandomSelector.core.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PeopleView"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      TextElement.FontWeight="Regular"
+      TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}" Loaded="LoadPeople"
+        DataContext="curten">
+
+    <Grid x:Name="ShowPersonGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" >
+            <Viewbox MinWidth="100" MaxWidth="200">
+                <TextBlock x:Name="textBlock" Text="Name:"></TextBlock>
+            </Viewbox>
+            <TextBox MinWidth="100" MaxWidth="200" Text="{Binding Path=Name}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" >
+            <Viewbox MinWidth="100" MaxWidth="200">
+                <TextBlock x:Name="textBlock1" Text="Pos:"></TextBlock>
+            </Viewbox>
+            <TextBlock MinWidth="100" MaxWidth="200" Text="{Binding Path=ID}" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="40"></TextBlock>
+            <Viewbox MinWidth="100" MaxWidth="200">
+                <TextBlock x:Name="textBlock2" Text="Value:"></TextBlock>
+            </Viewbox>
+            <TextBox MinWidth="100" MaxWidth="200" Text="{Binding Path=Value}" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="40" Cursor="IBeam"></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="2">
+            <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Click="Prewperson" Cursor="Hand">
+                <materialDesign:PackIcon Kind="ChevronLeft" />
+            </Button>
+            <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Click="Nextperson">
+                <materialDesign:PackIcon Kind="ChevronRight" />
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml;
+using FishRandomSelector.core.Info;
 
 namespace FishRandomSelector.Views
 {
@@ -26,21 +27,23 @@ namespace FishRandomSelector.Views
         public LoadWindow()
         {
             InitializeComponent();
-            
+            this.Topmost = false;
         }
         private void LoadWindow_OtherThread()
         {
+            App app = (App)Application.Current;
             #region 检测是否是第一次使用
-            //if(!System.IO.File.Exists("FishRandomSelector.xml"))
-            //{
-                this.Dispatcher.Invoke(() =>
+            if(!System.IO.File.Exists("FishRandomSelector.xml"))
+            {
+            this.Dispatcher.Invoke(() =>
                 {
                     FirstUse firstUse = new FirstUse();
                     Application.Current.MainWindow = firstUse;
                     Application.Current.MainWindow.Show();
+                    app.IsConfigFirstUse = true;
                     this.Close();
                 });
-            //}
+            }
             #endregion
             LoadInfo.Dispatcher.Invoke(() => { LoadInfo.Text = "正在验证应用可用性..."; });
             #region 验证应用可用性
@@ -50,20 +53,22 @@ namespace FishRandomSelector.Views
             else
                 Check1.Dispatcher.Invoke(() => { Check2.IsChecked = false; Check2.Background = Brushes.Red;Check2.Content = "!"; });
             #endregion
-            LoadInfo.Dispatcher.Invoke(() => { LoadInfo.Text = "验证完成"; });      
-            Thread.Sleep(500);
-            //TODO:编写加载名单的逻辑
-            Thread.Sleep(1000);
+            LoadInfo.Dispatcher.Invoke(() => { LoadInfo.Text = "验证完成"; });
+            try
+            { FishRandomSelector.core.Info.Names.ReadPeople(); }
+            catch { }
+            MessageBox.Show("Size:" + Names.size + "FirstPeople" + Names.GetPerson(1).Name);
             Check1.Dispatcher.Invoke(() => { Check3.IsChecked = true; }); 
-            Thread.Sleep(1000);
             //TODO:编写其他加载项
-            Check1.Dispatcher.Invoke(() => { Check4.IsChecked = true; }); 
-            this.Dispatcher.Invoke(() =>
-            {
-                Application.Current.MainWindow = main;
-                Application.Current.MainWindow.Show();
-                this.Close();
-            });
+            Check1.Dispatcher.Invoke(() => { Check4.IsChecked = true; });
+            
+            if(!app.IsConfigFirstUse)
+                this.Dispatcher.Invoke(() =>
+                {
+                    Application.Current.MainWindow = main;
+                    Application.Current.MainWindow.Show();
+                    this.Close();
+                });
             
         }
 
