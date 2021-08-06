@@ -71,7 +71,21 @@ namespace FishRandomSelector.core.Info
         }
         public static void SavePeople()
         {
-
+            XmlNode rootnode = FishXmlWriter.CreateRootElement("FishRandomSelectorNameList");
+            FishXmlWriter.CreateXmlDeclaration("1.0", "UTF-8", null);
+            foreach(person a in people)
+            {
+                PutAName(a.Name, a.Value, (XmlElement)rootnode);
+            }
+            FishXmlWriter.SavaXml("FishRandomSelectorNameList.xml");
+            FishXmlWriter.ClearXml();
+        }
+        private static void PutAName(string name, int value , XmlElement root)
+        {
+            XmlNode aname = FishXmlWriter.CreateElement("Name", "");
+            FishXmlWriter.AppendAttributeToElement((XmlElement)aname, "name", name);
+            FishXmlWriter.AppendAttributeToElement((XmlElement)aname, "value", value.ToString());
+            FishXmlWriter.AppendChild(root, aname);
         }
     }
 }

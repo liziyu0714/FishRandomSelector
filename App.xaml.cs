@@ -14,5 +14,9 @@ namespace FishRandomSelector
     public partial class App : Application
     {
         public bool IsConfigFirstUse = false;
+        private void Application_Exit(object sender, ExitEventArgs e)
+        {
+            FishRandomSelector.core.Info.Names.SavePeople();
+        }
     }
 }

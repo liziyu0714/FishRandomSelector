@@ -57,7 +57,6 @@ namespace FishRandomSelector.Views
             try
             { FishRandomSelector.core.Info.Names.ReadPeople(); }
             catch { }
-            MessageBox.Show("Size:" + Names.size + "FirstPeople" + Names.GetPerson(1).Name);
             Check1.Dispatcher.Invoke(() => { Check3.IsChecked = true; }); 
             //TODO:编写其他加载项
             Check1.Dispatcher.Invoke(() => { Check4.IsChecked = true; });
