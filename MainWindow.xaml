@@ -27,7 +27,7 @@
             </ColumnDefinition>
             <ColumnDefinition Width="9*"/>
         </Grid.ColumnDefinitions>
-        <Frame Source="/Views/PeopleView.xaml" Grid.Column="0" Grid.RowSpan="4"></Frame>
+        <Frame Source="/Views/PeopleView.xaml" Grid.Row="1" Grid.Column="0" Grid.RowSpan="3"></Frame>
         <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Width="10 " HorizontalAlignment="Center" ShowsPreview="False"/>
         <materialDesign:DialogHost IsOpen="False" x:Name="VerifyDialog" Grid.ColumnSpan="2" Grid.RowSpan="3">
             <materialDesign:DialogHost.DialogContent>
@@ -65,7 +65,7 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Viewbox Grid.Row="0"  Margin="16 16 16 4">
-                    <TextBlock  Style="{StaticResource MaterialDesignHeadline5TextBlock}" Text="..." />
+                    <TextBlock x:Name="MainText" Style="{StaticResource MaterialDesignHeadline5TextBlock}" Text="..." />
                 </Viewbox>
 
                 <Separator Grid.Row="1" Style="{StaticResource MaterialDesignLightSeparator}" />
@@ -79,6 +79,8 @@
                         <StackPanel>
                             <Button Content="提高概率" />
                             <Button Content="降低概率" />
+                            <Button Content="清空已选择的名单" Click="ClearIsSelected"/>
+                            <CheckBox IsChecked="True" Content="启用动画" x:Name="IsUsingAnimation" Click="ChangeUseAnimation"/>
                         </StackPanel>
                     </materialDesign:PopupBox>
                 </StackPanel>

@@ -117,5 +117,14 @@ namespace FishRandomSelector.Views
             else
                 MessageBox.Show(this,"请选择文件或手动输入","FishRandomSelector",MessageBoxButton.OK,MessageBoxImage.Warning);
         }
+
+        private void FinishFirstUseWorks(object sender, RoutedEventArgs e)
+        {
+            MainWindow main = new MainWindow();
+            Application.Current.MainWindow = main;
+            Application.Current.MainWindow.Show();
+            FishRandomSelector.core.Info.Names.ReadPeople();
+            this.Close();
+        }
     }
 }

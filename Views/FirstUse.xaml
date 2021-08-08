@@ -115,7 +115,8 @@
                     <Button
                         Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                         Command="{x:Static materialDesign:Transitioner.MoveNextCommand}" 
-                        Click="DoFirstUseWorks"
+                        Click="FinishFirstUseWorks"
+                        ToolTip="点击此按钮或关闭页面后再次进入程序表示你已同意上述协议，如不同意，请删除此程序"
                         Grid.Row="3">
                         <materialDesign:PackIcon Kind="ChevronRight"/>
                     </Button>

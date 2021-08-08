@@ -58,9 +58,7 @@ namespace FishRandomSelector.Views
             { FishRandomSelector.core.Info.Names.ReadPeople(); }
             catch { }
             Check1.Dispatcher.Invoke(() => { Check3.IsChecked = true; }); 
-            //TODO:编写其他加载项
             Check1.Dispatcher.Invoke(() => { Check4.IsChecked = true; });
-            
             if(!app.IsConfigFirstUse)
                 this.Dispatcher.Invoke(() =>
                 {

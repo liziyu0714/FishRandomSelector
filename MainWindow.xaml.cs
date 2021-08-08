@@ -60,7 +60,7 @@ namespace FishRandomSelector
 
         private void OpenLeftAreaButton_Click(object sender, RoutedEventArgs e)
         {
-            GridLength full = new GridLength(this.ActualWidth);
+            GridLength full = new GridLength(this.Width - 15);
             GridLength none = new GridLength(0);
             if (IsLeftAreaOpen)
             {
@@ -89,7 +89,39 @@ namespace FishRandomSelector
 
         private void SelectButton_Click(object sender, RoutedEventArgs e)
         {
+            GridLength none = new GridLength(0);
             ChangeSelectButtonState();
+            if(Settings.UISettings.CloseLeftAreaWhenClick)
+            {
+                LeftArea.Width = none;
+                IsLeftAreaOpen = false;
+            }
+            if(Settings.UISettings.UseAnimation)
+            {
+                MainText.Text = "启用动画";
+            }
+            else
+            {
+                MainText.Text = FishRandomSelector.core.Info.Names.GetPersonByValue();
+            }
+            ChangeSelectButtonState();
+        }
+
+        private void ChangeUseAnimation(object sender, RoutedEventArgs e)
+        {
+            if ((bool)IsUsingAnimation.IsChecked)
+            {
+                Settings.UISettings.UseAnimation = true;
+            }
+            else
+            {
+                Settings.UISettings.UseAnimation = false;
+            }
+        }
+
+        private void ClearIsSelected(object sender, RoutedEventArgs e)
+        {
+            FishRandomSelector.core.Info.Names.ClearIsSelected();
         }
     }
 }
