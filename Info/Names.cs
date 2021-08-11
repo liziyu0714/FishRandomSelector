@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Xml;
+using System.Collections.ObjectModel;
 
 namespace FishRandomSelector.core.Info
 {
@@ -24,21 +25,23 @@ namespace FishRandomSelector.core.Info
     public static class Names
     {
         private static int _size = 0;
-        private static List<person> people = new List<person>();
+        private static ObservableCollection<person> people = new ObservableCollection<person>();
         private static List<bool> IsSelected = new List<bool>();
         public static void AddPerson(string name , int value)
         {
             people.Add(new person(name, value, ++_size));
+            IsSelected.Add(false);
         }
         public static void DeletePerson(int pos)
         {
             CheckPos(pos);
             people.RemoveAt(pos);
             _size--;
+            IsSelected.RemoveAt(pos);
         }
         public static void ClearIsSelected()
         {
-            for (int i = 0; i < _size; i++)
+            for (int i = 0; i <= _size; i++)
                 IsSelected[i] = false;
         }
         public static string GetARandomName()
@@ -55,13 +58,16 @@ namespace FishRandomSelector.core.Info
                 {
                     return "名单全部选择完毕,请清空";
                 }
-                for (int i = 0; i < _size; i++)
+                for (int i = 0; i <= _size; i++)
                 {
                     int ARandomValue = random.Next(0, 100);
-                    if (ARandomValue <= people[i].Value && IsSelected[i] != true)
+                    if ((ARandomValue <= people[i].Value && IsSelected[i] != true)||people[i].Value==0)
                     {
                         IsSelected[i] = true;
-                        return people[i].Name;
+                        if (people[i].Value != 0)
+                            return people[i].Name;
+                        else
+                            return "存在值为0的项";
                     }
                 }
             }
@@ -97,6 +103,14 @@ namespace FishRandomSelector.core.Info
                 }
             }
             return p;
+        }
+        public static ObservableCollection<person> GetAllPeople()
+        {
+            return people;
+        }
+        public static void DeleteAll()
+        {
+            people.Clear();
         }
         public static int size
         {
@@ -139,6 +153,7 @@ namespace FishRandomSelector.core.Info
                 IsSelected.Add(false);
                 _size++;
             }
+            _size--;
         }
         public static void SavePeople()
         {

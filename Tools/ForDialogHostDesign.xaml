@@ -15,24 +15,16 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
-        <TextBlock Text="最后一步" Grid.Row="0" FontSize="45" HorizontalAlignment="Center" VerticalAlignment="Stretch" ></TextBlock>
-        <TextBlock Text="你需要了解一些法律信息，然后我们就可以开始" Grid.Row="1" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Stretch" ></TextBlock>
-        
-        <StackPanel Grid.Row="2" Orientation="Horizontal">
-            <TextBox IsReadOnly="true" Text="" x:Name="LICENSE" Height="300" MinWidth="200" Width="auto"></TextBox>
-            <TextBox IsReadOnly="true" Text="" x:Name="EULA" Height="300" MinWidth="200" Width="auto"></TextBox>
-        </StackPanel>
-        <Button
-            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-            Command="{x:Static materialDesign:Transitioner.MoveNextCommand}" 
-            Grid.Row="3" Cursor="Hand">
-            <materialDesign:PackIcon Kind="ChevronRight"/>
-        </Button>
+        <materialDesign:DialogHost>
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel Width="200" Height="200">
+                    <TextBlock HorizontalAlignment="Center" FontSize="20" Margin="0,20,0,0">你想跳转到哪里？</TextBlock>
+                    <TextBox FontSize="20" Margin="0,20,0,0"></TextBox>
+                    <Button Margin="0,20,0,0">确定</Button>
+                </StackPanel>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+                
+            
     </Grid>
 </Window>

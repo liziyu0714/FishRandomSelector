@@ -14,13 +14,12 @@
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
-        FontFamily="{DynamicResource MaterialDesignFont}" Loaded="LoadPeople"
-        DataContext="curten">
+        FontFamily="{DynamicResource MaterialDesignFont}" Loaded="LoadPeople">
 
     <Grid x:Name="ShowPersonGrid">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
@@ -34,16 +33,17 @@
             </Viewbox>
             <TextBox x:Name="NameEdit" IsReadOnly="true" MinWidth="100" MaxWidth="400" Text="{Binding Path=Name}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" Cursor="IBeam"/>
             <TextBlock x:Name="textMessage" Text="暂无名单可供编辑" TextWrapping="Wrap" Visibility="Hidden"/>
+            
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" >
             <Viewbox MinWidth="100" MaxWidth="200">
                 <TextBlock x:Name="textBlock1" Text="序号:"></TextBlock>
             </Viewbox>
-            <TextBlock MinWidth="100" MaxWidth="200" Text="{Binding Path=ID}" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="40"></TextBlock>
+            <TextBlock Grid.ColumnSpan="2" MinWidth="100" MaxWidth="200" Text="{Binding Path=ID}" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="40"></TextBlock>
             <Viewbox MinWidth="100" MaxWidth="200">
                 <TextBlock x:Name="textBlock2" Text="值:"></TextBlock>
             </Viewbox>
-            <TextBox x:Name="ValueEdit" IsReadOnly="true" MinWidth="100" MaxWidth="300"  Text="{Binding Path=Value}" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="40" Cursor="IBeam"></TextBox>
+            <TextBox Grid.ColumnSpan="2" x:Name="ValueEdit" IsReadOnly="true" MinWidth="100" MaxWidth="300"  Text="{Binding Path=Value}" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="40" Cursor="IBeam"></TextBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="2">
             <Button x:Name="prewBtn" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Click="Prewperson" Cursor="Hand">
@@ -52,8 +52,11 @@
             <Button x:Name="nextBtn" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Click="Nextperson">
                 <materialDesign:PackIcon Kind="ChevronRight" />
             </Button>
-            <Button x:Name="jumptoButton" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Click="jumptoButton_Click">
-                <materialDesign:PackIcon Kind="Jump" />
+            <Button x:Name="RefreshButton" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Click="RefreshButton_Click" Cursor="Hand" >
+                <materialDesign:PackIcon Kind="Refresh"  />
+            </Button>
+            <Button x:Name="jumptoButton" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Click="jumptoButton_Click" >
+                <materialDesign:PackIcon Kind="Jump"  />
             </Button>
             <ToggleButton
                 x:Name="IsEditMode"
@@ -68,6 +71,20 @@
                 <materialDesign:PackIcon Kind="Delete" />
             </Button>
         </StackPanel>
-        <materialDesign:Snackbar x:Name="NoNameListMessage" Grid.Row="3" Grid.ColumnSpan="2" Message="{Binding Text, ElementName=textMessage}" IsActive="True" HorizontalAlignment="Stretch"/>
+        <materialDesign:Snackbar x:Name="NoNameListMessage" Grid.Row="3" Grid.ColumnSpan="3" Message="{Binding Text, ElementName=textMessage}" IsActive="True" HorizontalAlignment="Stretch"/>
+        <materialDesign:DialogHost  Grid.ColumnSpan="2" Grid.RowSpan="4" IsOpen="False" x:Name="JumpToDialog">
+            <materialDesign:DialogHost.DialogContent >
+                <StackPanel Width="200" Height="200">
+                    <TextBlock HorizontalAlignment="Center" FontSize="20" Margin="0,20,0,0">你想跳转到哪里？</TextBlock>
+                    <TextBox  x:Name="NumJumpTo" FontSize="20" Margin="0,20,0,0" materialDesign:HintAssist.HelperText="{Binding Source={x:Reference Name=errorMessage},Path=Text}" TextChanged="NumJumpTo_TextChanged"></TextBox>
+                    <Button x:Name="JumpToFinishButton" Click="JumpToFinishButton_Click" Margin="0,20,0,0">确定</Button>
+                    <TextBlock x:Name="errorMessage" Text="请输入" TextWrapping="Wrap" Visibility="Hidden"/>
+                </StackPanel>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+        <ListBox  Margin="0,0,50,0" x:Name="NameList" DisplayMemberPath="Name" Grid.Row="0" Grid.Column="2" SelectionChanged="NameList_Selected" HorizontalAlignment="Right" >
+            
+        </ListBox>
     </Grid>
+    
 </Page>

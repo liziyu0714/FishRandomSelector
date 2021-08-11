@@ -14,6 +14,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Shell;
 
 namespace FishRandomSelector
 {
@@ -23,13 +24,16 @@ namespace FishRandomSelector
     public partial class MainWindow : Window
     {
         private bool IsLeftAreaOpen = false;
+        private bool ButtonCanUse = true;
+        App app = (App)Application.Current;
+
         public bool IsLeftAreaOpen1 { get => IsLeftAreaOpen; set => IsLeftAreaOpen = value; }
 
         public MainWindow()
         {
             InitializeComponent();
         }
-        
+
         private void MainWindowLoaded(object sender, RoutedEventArgs e)
         {
             //MainWindowVerify();
@@ -69,44 +73,66 @@ namespace FishRandomSelector
             }
             else
             {
-                LeftArea.Width =full ;
+                LeftArea.Width = full;
                 IsLeftAreaOpen = true;
             }
         }
-        private void ChangeSelectButtonState ()
+        private void ChangeSelectButtonState()
         {
-            if(SelectButton.IsEnabled)
+            if (ButtonCanUse)
             {
                 SelectButton.Cursor = Cursors.Wait;
                 SelectButton.IsEnabled = false;
+                ButtonCanUse = false;
             }
             else
             {
                 SelectButton.Cursor = Cursors.Hand;
                 SelectButton.IsEnabled = true;
+                ButtonCanUse = true;
             }
         }
 
         private void SelectButton_Click(object sender, RoutedEventArgs e)
         {
+            if(!app.HavePeople)
+            {
+                MainText.Text = "无名单";
+                return;
+            }
             GridLength none = new GridLength(0);
-            ChangeSelectButtonState();
-            if(Settings.UISettings.CloseLeftAreaWhenClick)
+            if (Settings.UISettings.CloseLeftAreaWhenClick)
             {
                 LeftArea.Width = none;
                 IsLeftAreaOpen = false;
             }
-            if(Settings.UISettings.UseAnimation)
+            if (Settings.UISettings.UseAnimation)
             {
-                MainText.Text = "启用动画";
+                Thread ChangeTextThread = new Thread(ChangeText);
+                var taskbarinfo = new TaskbarItemInfo();
+                taskbarinfo.ProgressValue = 0.5;
+                taskbarinfo.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Error;
+                ChangeTextThread.Start();
+                MainText.Text = FishRandomSelector.core.Info.Names.GetPersonByValue();
             }
             else
             {
                 MainText.Text = FishRandomSelector.core.Info.Names.GetPersonByValue();
             }
-            ChangeSelectButtonState();
+            
         }
-
+        private void ChangeText()
+        {
+            this.Dispatcher.Invoke(ChangeSelectButtonState);
+            Random timesRandom = new Random();
+            int Time = timesRandom.Next(Settings.UISettings.MinChangeTextTimes, Settings.UISettings.MaxChangeTextTimes);
+            for (int i = 0; i < Time; i++)
+            {
+                Thread.Sleep(Settings.UISettings.TimeBetweenChangeText);
+                this.Dispatcher.Invoke(() => { MainText.Text = core.Info.Names.GetARandomName(); });
+            }
+            this.Dispatcher.Invoke(ChangeSelectButtonState);
+        }
         private void ChangeUseAnimation(object sender, RoutedEventArgs e)
         {
             if ((bool)IsUsingAnimation.IsChecked)
@@ -122,6 +148,7 @@ namespace FishRandomSelector
         private void ClearIsSelected(object sender, RoutedEventArgs e)
         {
             FishRandomSelector.core.Info.Names.ClearIsSelected();
+
         }
     }
 }
