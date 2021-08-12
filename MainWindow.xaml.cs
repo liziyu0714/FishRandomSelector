@@ -150,5 +150,19 @@ namespace FishRandomSelector
             FishRandomSelector.core.Info.Names.ClearIsSelected();
 
         }
+
+        private void Menu_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch(Menu.SelectedIndex)
+            {
+                case 0:LeftAreaHost.Source = new Uri("Views/SettingPage.xaml",UriKind.Relative);
+                    MaterialDesignThemes.Wpf.DrawerHost.CloseDrawerCommand.Execute(null, Menu);
+                    break;
+                case 1:
+                    LeftAreaHost.Source = new Uri("Views/PeopleView.xaml",UriKind.Relative);
+                    MaterialDesignThemes.Wpf.DrawerHost.CloseDrawerCommand.Execute(null, Menu);
+                    break;
+            }
+        }
     }
 }

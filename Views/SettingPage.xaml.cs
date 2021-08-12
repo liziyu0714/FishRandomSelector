@@ -27,6 +27,10 @@ namespace FishRandomSelector.core.Views
             OpenLeftArea.IsDefine = Settings.UISettings.CloseLeftAreaWhenClick;
             SaveFast.IsDefine = Settings.UISettings.AlwaysSaveWhenEndEit;
             ErrorDialog.IsDefine = Settings.UISettings.UseSystemDefaultErrorDialog;
+            TimeBetween.SettingValue = Settings.UISettings.TimeBetweenChangeText.ToString();
+            MaxChangeTime.SettingValue = Settings.UISettings.MaxChangeTextTimes.ToString();
+            MinChangeTime.SettingValue = Settings.UISettings.MinChangeTextTimes.ToString();
+
         }
 
         private void ASetting_CheckChanged(object sender, RoutedPropertyChangedEventArgs<bool> e)
@@ -44,10 +48,23 @@ namespace FishRandomSelector.core.Views
                 default: return;
             }
         }
-
         private void Menu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Settings.UISettings.TimeBetweenChangeText = int.Parse(TimeBetween.SettingValue);
+                Settings.UISettings.MaxChangeTextTimes = int.Parse(MaxChangeTime.SettingValue);
+                Settings.UISettings.MinChangeTextTimes = int.Parse(MinChangeTime.SettingValue);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("设置的值有问题:" + ex.Message);
+            }
         }
     }
 }
