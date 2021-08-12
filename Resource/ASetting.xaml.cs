@@ -23,7 +23,6 @@ namespace FishRandomSelector.core.Resource
         public static DependencyProperty SettingNameProperty;
         public static DependencyProperty HelpTextProperty;
         public static DependencyProperty IsDefineProperty;
-        public static DependencyProperty NameColorProperty;
         public static readonly RoutedEvent CheckChangeEvent;
         public string SettingName
         {
@@ -39,11 +38,6 @@ namespace FishRandomSelector.core.Resource
         {
             get { return (bool)GetValue(IsDefineProperty); }
             set { SetValue(IsDefineProperty, value); }
-        }
-        public Color NameColor
-        {
-            get { return (Color)GetValue(NameColorProperty); }
-            set { SetValue(NameColorProperty, value); }
         }
         public event RoutedPropertyChangedEventHandler<bool> CheckChanged
         {
@@ -71,12 +65,7 @@ namespace FishRandomSelector.core.Resource
                 typeof(bool),
                 typeof(ASetting),
                 new PropertyMetadata(new PropertyChangedCallback(OnIsDefineChanged)));
-            NameColorProperty = DependencyProperty.Register(
-                "NameColor",
-                typeof(Color),
-                typeof(ASetting),
-                new PropertyMetadata(new PropertyChangedCallback(OnNameColorChanged)));
-            CheckChangeEvent = EventManager.RegisterRoutedEvent("CheckChanged",RoutingStrategy.Bubble,typeof(RoutedPropertyChangedEventHandler<bool>) , typeof(ASetting) );
+            CheckChangeEvent = EventManager.RegisterRoutedEvent("CheckChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<bool>), typeof(ASetting));
 
         }
         private static void OnSettingNameChanged(DependencyObject sender , DependencyPropertyChangedEventArgs e)
@@ -89,7 +78,7 @@ namespace FishRandomSelector.core.Resource
         }
         private static void OnIsDefineChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-
+            
         }
         private static void OnNameColorChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {

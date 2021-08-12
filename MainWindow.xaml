@@ -27,7 +27,24 @@
             </ColumnDefinition>
             <ColumnDefinition Width="9*"/>
         </Grid.ColumnDefinitions>
-        <Frame Source="/Views/SettingPage.xaml"  Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" Margin="0,50,0,0"></Frame>
+        <materialDesign:DrawerHost
+            Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" Margin="0,50,0,0"
+            x:Name="DrawerHost"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            BorderThickness="2"
+            BorderBrush="{DynamicResource MaterialDesignDivider}">
+            <materialDesign:DrawerHost.LeftDrawerContent>
+                <ListBox x:Name="Menu" >
+                    <TextBlock FontSize="20">基本设置</TextBlock>
+                    <TextBlock FontSize="20">名单编辑</TextBlock>
+                    <TextBlock FontSize="20">导入导出</TextBlock>
+                    <TextBlock FontSize="20">信息</TextBlock>
+                </ListBox>
+            </materialDesign:DrawerHost.LeftDrawerContent>
+            <Frame Source="/Views/SettingPage.xaml"  ></Frame>
+        </materialDesign:DrawerHost>
+        
         <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Width="10 " HorizontalAlignment="Center" ShowsPreview="False"/>
         <materialDesign:DialogHost IsOpen="False" x:Name="VerifyDialog" Grid.ColumnSpan="2" Grid.RowSpan="3">
             <materialDesign:DialogHost.DialogContent>

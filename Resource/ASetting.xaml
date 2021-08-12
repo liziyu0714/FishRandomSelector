@@ -16,7 +16,7 @@
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <TextBlock FontSize="20" x:Name="MainSettingText" Text="{Binding ElementName=asetting ,Path=SettingName}" ></TextBlock>
             <ToggleButton 
-                    x:Name="togBtn"  Style="{StaticResource MaterialDesignSwitchToggleButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="ToggleButton_Click"/>
+                     x:Name="togBtn"  Style="{StaticResource MaterialDesignSwitchToggleButton}" IsChecked="{Binding ElementName=asetting,Path=IsDefine}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="ToggleButton_Click"/>
         </StackPanel>
         <TextBlock Grid.Row="1" FontSize="15" x:Name="SetingHelpText" Text="{Binding ElementName=asetting,Path=HelpText}" Foreground="#FF676767"  Opacity="0.5"></TextBlock>
     </Grid>

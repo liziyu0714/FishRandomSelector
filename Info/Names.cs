@@ -157,6 +157,10 @@ namespace FishRandomSelector.core.Info
         }
         public static void SavePeople()
         {
+            if(people.Count==0)
+            {
+                return;
+            }
             XmlNode rootnode = FishXmlWriter.CreateRootElement("FishRandomSelectorNameList");
             FishXmlWriter.CreateXmlDeclaration("1.0", "UTF-8", null);
             foreach (person a in people)

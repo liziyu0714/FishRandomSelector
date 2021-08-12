@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:FishRandomSelector.core.Views"
       xmlns:controls ="clr-namespace:FishRandomSelector.core.Resource"
+      xmlns:data ="clr-namespace:FishRandomSelector.Settings"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Background="{DynamicResource MaterialDesignPaper}"
@@ -16,11 +17,10 @@
       TextOptions.TextFormattingMode="Ideal" 
       TextOptions.TextRenderingMode="Auto"
       FontFamily="{DynamicResource MaterialDesignFont}">
-
-    <Grid>
-        <StackPanel>
-            <controls:ASetting x:Name="OpenLeftArea" NameColor="Yellow" SettingName="是否打开侧边栏" HelpText="启用后会导致点击抽取按钮后关闭左侧区域"  HorizontalAlignment="Left" CheckChanged="ASetting_CheckChanged"/>
-        </StackPanel>
-        
-    </Grid>
+    <StackPanel x:Name="BasicSettings" >
+        <controls:ASetting x:Name="OpenLeftArea"  SettingName="是否打开侧边栏" HelpText="启用后会导致点击抽取按钮后关闭左侧区域"  HorizontalAlignment="Left" CheckChanged="ASetting_CheckChanged"/>
+        <controls:ASetting x:Name="SaveFast"  SettingName="PeopleView中编辑结束后立即保存" HelpText="禁用可以提高性能(大概10ms,不关也罢)"  HorizontalAlignment="Left" CheckChanged="ASetting_CheckChanged"/>
+        <controls:ASetting x:Name="ErrorDialog"  SettingName="出错时使用系统对话框" HelpText="如果不使用系统对话框,新的对话框还可能发生错误..."  HorizontalAlignment="Left" CheckChanged="ASetting_CheckChanged"/>
+        <controls:ATextSetting x:Name="TimeBetween" SettingName="名称改变频率" HelpText="使用动画时每个名字之间的间隔时间"/>
+    </StackPanel>
 </Page>

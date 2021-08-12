@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FishRandomSelector.core.Resource;
 
 namespace FishRandomSelector.core.Views
 {
@@ -23,12 +24,30 @@ namespace FishRandomSelector.core.Views
         public SettingPage()
         {
             InitializeComponent();
+            OpenLeftArea.IsDefine = Settings.UISettings.CloseLeftAreaWhenClick;
+            SaveFast.IsDefine = Settings.UISettings.AlwaysSaveWhenEndEit;
+            ErrorDialog.IsDefine = Settings.UISettings.UseSystemDefaultErrorDialog;
         }
 
         private void ASetting_CheckChanged(object sender, RoutedPropertyChangedEventArgs<bool> e)
         {
-            bool Define = OpenLeftArea.IsDefine;
-            MessageBox.Show("Hello,world. Now it is " + Define.ToString());
+            ASetting p = (ASetting)sender;
+            bool define = p.IsDefine;
+            switch (p.Name)
+            {
+                case "OpenLeftArea":
+                    Settings.UISettings.CloseLeftAreaWhenClick = define;break;
+                case "SaveFast":
+                    Settings.UISettings.AlwaysSaveWhenEndEit = define; break;
+                case "ErrorDialog":
+                    Settings.UISettings.UseSystemDefaultErrorDialog = define; break;
+                default: return;
+            }
+        }
+
+        private void Menu_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
         }
     }
 }

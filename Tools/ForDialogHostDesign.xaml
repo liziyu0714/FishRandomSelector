@@ -15,16 +15,13 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}">
     <Grid>
-        <materialDesign:DialogHost>
-            <materialDesign:DialogHost.DialogContent>
-                <StackPanel Width="200" Height="200">
-                    <TextBlock HorizontalAlignment="Center" FontSize="20" Margin="0,20,0,0">你想跳转到哪里？</TextBlock>
-                    <TextBox FontSize="20" Margin="0,20,0,0"></TextBox>
-                    <Button Margin="0,20,0,0">确定</Button>
-                </StackPanel>
-            </materialDesign:DialogHost.DialogContent>
-        </materialDesign:DialogHost>
-                
+
+        <ListBox>
+            <TextBlock FontSize="20">基本设置</TextBlock>
+            <TextBlock FontSize="20">名单编辑</TextBlock>
+            <TextBlock FontSize="20">导入导出</TextBlock>
+            <TextBlock FontSize="20">信息</TextBlock>
+        </ListBox>
             
     </Grid>
 </Window>

@@ -55,7 +55,13 @@ namespace FishRandomSelector.Views
             #endregion
             LoadInfo.Dispatcher.Invoke(() => { LoadInfo.Text = "验证完成"; });
             try
-            { FishRandomSelector.core.Info.Names.ReadPeople(); }
+            { 
+                if(!System.IO.File.Exists("FishRandomSelectorNameList.xml"))
+                {
+                    app.HavePeople = false;
+                }
+                FishRandomSelector.core.Info.Names.ReadPeople();
+            }
             catch { }
             Check1.Dispatcher.Invoke(() => { Check3.IsChecked = true; }); 
             Check1.Dispatcher.Invoke(() => { Check4.IsChecked = true; });

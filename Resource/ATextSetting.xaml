@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="FishRandomSelector.core.Resource.ATextSetting"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FishRandomSelector.core.Resource"
+             mc:Ignorable="d" 
+             d:DesignHeight="129" d:DesignWidth="400"
+             Name="aTextSetting">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <TextBlock FontSize="20" x:Name="MainSettingText" Text="{Binding ElementName=aTextSetting ,Path=SettingName}" ></TextBlock>
+            <TextBox FontSize="18" MinWidth="100" x:Name="SettingValue_Text" Text="{Binding ElementName=aTextSetting,Path=SettingValue}" TextChanged="SettingValue_TextChanged"/>
+        </StackPanel>
+        <TextBlock Grid.Row="1" FontSize="15" x:Name="SetingHelpText" Text="{Binding ElementName=aTextSetting,Path=HelpText}" Foreground="#FF676767"  Opacity="0.5"></TextBlock>
+    </Grid>
+</UserControl>
