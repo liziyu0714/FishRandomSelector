@@ -1,0 +1,50 @@
+﻿<Page x:Class="FishRandomSelector.core.Views.Inoutput"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FishRandomSelector.core.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="350" d:DesignWidth="550"
+      Name="window"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      TextElement.FontWeight="Regular"
+      TextElement.FontSize="13"
+      TextOptions.TextFormattingMode="Ideal" 
+      TextOptions.TextRenderingMode="Auto"        
+      Background="{DynamicResource MaterialDesignPaper}"
+      FontFamily="{DynamicResource MaterialDesignFont}"
+      Title="Inoutput"
+      >
+
+    <StackPanel>
+        <GroupBox
+            Header="导入"
+            Style="{DynamicResource MaterialDesignGroupBox}"
+            materialDesign:ShadowAssist.ShadowDepth="Depth3"
+            BorderThickness="0">
+            <StackPanel>
+                <Button x:Name="Button_1" Margin="5,5,5,5" FontFamily="Microsoft YaHei" Click="Buttons_Click">通过重置来导入名单(注意:这会使你丢失所有配置)</Button>
+                <Button x:Name="Button_2" Margin="5,5,5,5" FontFamily="Microsoft YaHei" Click="Buttons_Click">导入一个普通文件(txt,fnamelist和其他)</Button>
+                <Button x:Name="Button_3" Margin="5" FontFamily="Microsoft YaHei" Click="Buttons_Click">导入配置好的文件(FishRandomSelector.xml)</Button>
+                <Button x:Name="Button_4" Margin="5" FontFamily="Microsoft YaHei" Click="Buttons_Click">导入配置(FishRandomSelector.xml)</Button>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox
+            Header="导出"
+            Style="{DynamicResource MaterialDesignGroupBox}"
+            materialDesign:ShadowAssist.ShadowDepth="Depth3"
+            BorderThickness="0">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="Button_5"  Margin="5,5,5,5" FontFamily="Microsoft YaHei" Click="Buttons_Click">导出文本名单</Button>
+                    <Button x:Name="Button_6" Margin="5,5,5,5" FontFamily="Microsoft YaHei" Click="Buttons_Click">导出配置好的名单</Button>
+                    <Button x:Name="Button_7" Margin="5,5,5,5" FontFamily="Microsoft YaHei" Click="Buttons_Click">重置所有配置(仅删除配置文件)</Button>
+                </StackPanel>
+
+                <Button x:Name="Button_8" Margin="5,5,5,5" FontFamily="Microsoft YaHei" Click="Buttons_Click" Cursor="Hand">导出配置</Button>
+            </StackPanel>
+        </GroupBox>
+    </StackPanel>
+</Page>

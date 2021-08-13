@@ -50,7 +50,7 @@
             </StackPanel>
         </materialDesign:DrawerHost>
         
-        <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Width="10 " HorizontalAlignment="Center" ShowsPreview="False"/>
+        <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="3"  Width="10" HorizontalAlignment="Center" ShowsPreview="False" Margin="0,0,10,0"/>
         <materialDesign:DialogHost IsOpen="False" x:Name="VerifyDialog" Grid.ColumnSpan="2" Grid.RowSpan="3">
             <materialDesign:DialogHost.DialogContent>
                 <Grid Height="100" Width="200">
@@ -79,35 +79,114 @@
                 </Grid>
             </materialDesign:DialogHost.DialogContent>
         </materialDesign:DialogHost>
-        <materialDesign:Card Grid.Row="0" Grid.Column="2" Background="#03a9f4" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Padding="0" Grid.RowSpan="2">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="5*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Viewbox Grid.Row="0"  Margin="16 16 16 4">
-                    <TextBlock x:Name="MainText" Style="{StaticResource MaterialDesignHeadline5TextBlock}" Text="..." />
-                </Viewbox>
+        <materialDesign:Flipper Grid.Row="0" Grid.Column="2" Grid.RowSpan="2">
+            <materialDesign:Flipper.FrontContent>
+                <materialDesign:Card Grid.Row="0" Grid.Column="2" Background="#03a9f4" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Padding="0" Grid.RowSpan="2">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Viewbox Grid.Row="0"  Margin="16 16 16 4">
+                            <TextBlock x:Name="MainText" Style="{StaticResource MaterialDesignHeadline5TextBlock}" Text="..." />
+                        </Viewbox>
 
-                <Separator Grid.Row="1" Style="{StaticResource MaterialDesignLightSeparator}" />
-                <Viewbox Grid.Row="2" Margin="16 0 16 8" VerticalAlignment="Center" HorizontalAlignment="Left">
-                    <TextBlock  Style="{StaticResource MaterialDesignBody2TextBlock}" Text="FishRandomSelector" />
-                </Viewbox>
+                        <Separator Grid.Row="1" Style="{StaticResource MaterialDesignLightSeparator}" />
+                        <Viewbox Grid.Row="2" Margin="16 0 16 8" VerticalAlignment="Center" HorizontalAlignment="Left">
+                            <TextBlock  Style="{StaticResource MaterialDesignBody2TextBlock}" Text="FishRandomSelector" />
+                        </Viewbox>
+                        
 
-                <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="16 0 16 8" HorizontalAlignment="Right">
-
-                    <materialDesign:PopupBox HorizontalAlignment="Right" Padding="2 0 2 0">
-                        <StackPanel>
-                            <Button Content="提高概率" />
-                            <Button Content="降低概率" />
-                            <Button Content="清空已选择的名单" Click="ClearIsSelected"/>
-                            <CheckBox IsChecked="True" Content="启用动画" x:Name="IsUsingAnimation" Click="ChangeUseAnimation"/>
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="16 0 16 8" HorizontalAlignment="Right">
+                            <Button
+                                HorizontalAlignment="Right"
+                                Style="{StaticResource MaterialDesignToolForegroundButton}"
+                                Width="36"
+                                Padding="2 0 2 0"
+                                materialDesign:RippleAssist.IsCentered="True"
+                                Command="{x:Static materialDesign:Flipper.FlipCommand}">
+                                <materialDesign:PackIcon
+                                    Kind="People" />
+                            </Button>
+                            <materialDesign:PopupBox HorizontalAlignment="Right" Padding="2 0 2 0">
+                                <StackPanel>
+                                    <Button Content="提高概率" />
+                                    <Button Content="降低概率" />
+                                    <Button Content="清空已选择的名单" Click="ClearIsSelected"/>
+                                    <CheckBox IsChecked="True" Content="启用动画" x:Name="IsUsingAnimation" Click="ChangeUseAnimation"/>
+                                </StackPanel>
+                            </materialDesign:PopupBox>
                         </StackPanel>
-                    </materialDesign:PopupBox>
-                </StackPanel>
-            </Grid>
-        </materialDesign:Card>
+                    </Grid>
+                </materialDesign:Card>
+            </materialDesign:Flipper.FrontContent>
+            <materialDesign:Flipper.BackContent>
+                <Grid>
+
+                    <materialDesign:Card
+            Background="#03a9f4"
+            Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
+            Padding="0"
+            >
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <ListBox Grid.Column="0" Background="White">
+                            </ListBox>
+                            <Separator
+                    Grid.Column="1"
+                    
+                    Style="{StaticResource MaterialDesignLightSeparator}" />
+                            <Grid Grid.Column="2" Margin="0,0,-750,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="3*"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock
+                   
+                    Style="{StaticResource MaterialDesignHeadline1TextBlock}"
+                    Text="..." HorizontalAlignment="Center" VerticalAlignment="Center"  />
+                                <Separator
+                    Grid.Row="1"
+                    
+                    Style="{StaticResource MaterialDesignLightSeparator}" />
+                                <Slider
+                                    x:Name="PeopleCount"
+                                    Minimum="0"
+                                    Maximum="50"
+                                    Value="0"
+                                    TickFrequency="5"/>
+                                <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                                    <TextBlock >抽取个数:</TextBlock>
+                                <TextBlock Text="{Binding Source={x:Reference Name=PeopleCount} ,Path=Value,StringFormat={}{0:F0}}"></TextBlock>
+                                </StackPanel>
+                                
+                                <Button
+                        Grid.Row="2"
+                        HorizontalAlignment="Center"
+                         Style="{StaticResource MaterialDesignToolForegroundButton}"
+                                Width="126"
+                                Padding="2 0 2 0"
+                                materialDesign:RippleAssist.IsCentered="True"
+                                Command="{x:Static materialDesign:Flipper.FlipCommand}" Margin="0,32,0,20" Cursor="Hand">
+                                    <materialDesign:PackIcon
+                                    Kind="Person" Height="35" Width="40" />
+                                </Button>
+                            </Grid>
+
+                        </Grid>
+                    </materialDesign:Card>
+
+
+                </Grid>
+            </materialDesign:Flipper.BackContent>
+        </materialDesign:Flipper>
+        
         <materialDesign:ColorZone
             Mode="PrimaryDark"
             Padding="16"

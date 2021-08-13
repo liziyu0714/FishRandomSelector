@@ -140,7 +140,7 @@ namespace FishRandomSelector.core.Info
         {
             int valueInList;
             string nameInList;
-            if (!System.IO.File.Exists("FishRandomSelectorNameList.xml")) throw new System.IO.FileNotFoundException("没有FishRandomSelectorNameList.xml文件");
+           // if (!System.IO.File.Exists("FishRandomSelectorNameList.xml")) throw new System.IO.FileNotFoundException("没有FishRandomSelectorNameList.xml文件");
             FishXmlReader.LoadXml("FishRandomSelectorNameList.xml");
             XmlNode node = FishXmlReader.GetXmlDocumentRoot();
             XmlNodeList nodeList = node.ChildNodes;

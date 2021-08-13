@@ -155,11 +155,20 @@ namespace FishRandomSelector
         {
             switch(Menu.SelectedIndex)
             {
-                case 0:LeftAreaHost.Source = new Uri("Views/SettingPage.xaml",UriKind.Relative);
+                case 0:
+                    LeftAreaHost.Source = new Uri("Views/SettingPage.xaml",UriKind.Relative);
                     MaterialDesignThemes.Wpf.DrawerHost.CloseDrawerCommand.Execute(null, Menu);
                     break;
                 case 1:
                     LeftAreaHost.Source = new Uri("Views/PeopleView.xaml",UriKind.Relative);
+                    MaterialDesignThemes.Wpf.DrawerHost.CloseDrawerCommand.Execute(null, Menu);
+                    break;
+                case 2:
+                    LeftAreaHost.Source = new Uri("Views/Inoutput.xaml", UriKind.Relative);
+                    MaterialDesignThemes.Wpf.DrawerHost.CloseDrawerCommand.Execute(null, Menu);
+                    break;
+                case 3:
+                    LeftAreaHost.Source = new Uri("Views/InfoView.xaml", UriKind.Relative);
                     MaterialDesignThemes.Wpf.DrawerHost.CloseDrawerCommand.Execute(null, Menu);
                     break;
             }

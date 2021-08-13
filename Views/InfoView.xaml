@@ -5,10 +5,42 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:FishRandomSelector.core.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="InfoView">
+      d:DesignHeight="250" d:DesignWidth="450"
+      Title="InfoView"
+      Name="window"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      TextElement.FontWeight="Regular"
+      TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+      >
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <TextBlock FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center">FishRandomSelector</TextBlock>
+            <Viewbox>
+                <Image Source="/Resource/Fish.png"></Image>
+            </Viewbox>
+        </StackPanel>
+        <ScrollViewer Grid.Row="1">
+            <StackPanel>
+                <TextBlock x:Name="Info1" FontSize="18" Text="产品名称:" />
+                <TextBlock x:Name="Info2" FontSize="18" Text="产品版本:" />
+                <TextBlock FontSize="20" Text="版权所有 © liziyu0714 , All rights reserved." HorizontalAlignment="Left"/>
+                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                    <TextBox IsReadOnly="true" Text="" x:Name="LICENSE" Height="300"  MaxWidth="300" Width="auto" Cursor="IBeam"></TextBox>
+                    <TextBox IsReadOnly="true" Text="" x:Name="EULA" Height="300" MaxWidth="300" Width="auto" Cursor="IBeam"></TextBox>
+                </StackPanel>
+            </StackPanel>
+            
+        </ScrollViewer>
+
     </Grid>
 </Page>

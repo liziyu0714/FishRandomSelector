@@ -16,12 +16,54 @@
         FontFamily="{DynamicResource MaterialDesignFont}">
     <Grid>
 
-        <StackPanel Orientation="Horizontal">
-            <Button x:Name="nextBtn" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Cursor="Hand" >
-                <materialDesign:PackIcon Kind="ChevronRight" />
-            </Button>
-            <Frame Source="/Views/SettingPage.xaml"  ></Frame>
-        </StackPanel>
-            
+        <materialDesign:Card
+            Background="#03a9f4"
+            Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
+            Padding="0"
+            >
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <ListBox Grid.Column="0" Background="White">
+                    <TextBlock>Hello！</TextBlock>
+                </ListBox>
+                <Separator
+                    Grid.Column="1"
+                    
+                    Style="{StaticResource MaterialDesignLightSeparator}" />
+                <Grid Grid.Column="2" Margin="0,0,-750,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock
+                   
+                    Style="{StaticResource MaterialDesignHeadline1TextBlock}"
+                    Text="..." HorizontalAlignment="Center" VerticalAlignment="Center"  />
+                    <Separator
+                    Grid.Row="1"
+                    
+                    Style="{StaticResource MaterialDesignLightSeparator}" />
+                    <Button
+                        Grid.Row="2"
+                        HorizontalAlignment="Center"
+                         Style="{StaticResource MaterialDesignToolForegroundButton}"
+                                Width="126"
+                                Padding="2 0 2 0"
+                                materialDesign:RippleAssist.IsCentered="True"
+                                Command="{x:Static materialDesign:Flipper.FlipCommand}" Margin="0,32,0,20">
+                        <materialDesign:PackIcon
+                                    Kind="Person" Height="35" Width="40" />
+                    </Button>
+                </Grid>
+
+            </Grid>
+        </materialDesign:Card>
+
+
     </Grid>
 </Window>

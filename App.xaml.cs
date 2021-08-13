@@ -15,10 +15,15 @@ namespace FishRandomSelector
     {
         public bool IsConfigFirstUse = false;
         public bool HavePeople = true;
+        public bool IsReset = false;
         private void Application_Exit(object sender, ExitEventArgs e)
         {
-            FishRandomSelector.core.Info.Names.SavePeople();
-            FishRandomSelector.Settings.UISettings.SaveConfig();
+            if(!IsReset)
+            {
+                FishRandomSelector.core.Info.Names.SavePeople();
+                FishRandomSelector.Settings.UISettings.SaveConfig();
+            }
+           
         }
 
         private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)

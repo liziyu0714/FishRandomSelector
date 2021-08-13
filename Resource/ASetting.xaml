@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="129" d:DesignWidth="400"
              Name="asetting"
-             Foreground="{Binding ElementName=asetting,Path=NameColor}">
+             >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
