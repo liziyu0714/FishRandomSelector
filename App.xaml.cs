@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FishRandomSelector.core.Info;
+using FishRandomSelector.Views;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -16,6 +18,27 @@ namespace FishRandomSelector
         public bool IsConfigFirstUse = false;
         public bool HavePeople = true;
         public bool IsReset = false;
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            SplashScreen s = new SplashScreen(@"Resource\FishRandomSelector.png");
+            s.Show(false);
+            s.Close(TimeSpan.FromSeconds(1.5));
+            base.OnStartup(e);
+            if (!System.IO.File.Exists("FishRandomSelector.xml"))
+            {
+                FirstUse firstUse = new FirstUse();
+                firstUse.ShowDialog();
+            }
+            if (!System.IO.File.Exists("FishRandomSelectorNameList.xml"))
+                this.HavePeople = false;
+            else
+                Names.ReadPeople();
+            MainWindow main = new MainWindow();
+            Application.Current.MainWindow = main;
+            main.Show();
+            if (System.IO.File.Exists("FishRandomSelectorNameList.xml"))
+                Names.ReadPeople();
+        }
         private void Application_Exit(object sender, ExitEventArgs e)
         {
             if (!IsReset)

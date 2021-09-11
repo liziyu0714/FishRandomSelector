@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:FishRandomSelector"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             StartupUri="Views\LoadWindow.xaml"
+             ShutdownMode="OnExplicitShutdown"
              Exit="Application_Exit"
              DispatcherUnhandledException="Application_DispatcherUnhandledException">
     <Application.Resources>

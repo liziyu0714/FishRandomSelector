@@ -120,15 +120,7 @@ namespace FishRandomSelector.Views
 
         private void FinishFirstUseWorks(object sender, RoutedEventArgs e)
         {
-            MainWindow main = new MainWindow();
-            Application.Current.MainWindow = main;
-            Application.Current.MainWindow.Show();
-            try
-            {
-                FishRandomSelector.core.Info.Names.ReadPeople();
-            }
-            catch { }
-            this.Close();
+            this.DialogResult = true;
         }
     }
 }

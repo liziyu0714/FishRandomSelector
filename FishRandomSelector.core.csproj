@@ -27,6 +27,11 @@
     <None Remove=".gitignore" />
     <None Remove="EULA" />
     <None Remove="LICENSE" />
+    <None Remove="Resource\FishSoftware.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resource\fishrandomselector.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,6 +41,8 @@
   <ItemGroup>
     <Resource Include="EULA" />
     <Resource Include="LICENSE" />
+    <Resource Include="Resource\fishsoftware.png" />
   </ItemGroup>
 
+	
 </Project>
