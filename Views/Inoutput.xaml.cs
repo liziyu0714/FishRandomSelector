@@ -1,5 +1,8 @@
-﻿using System;
+﻿using FishRandomSelector.Tools;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,10 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Microsoft.Win32;
-using System.IO;
 using System.Xml;
-using FishRandomSelector.Tools;
 
 namespace FishRandomSelector.core.Views
 {
@@ -35,7 +35,7 @@ namespace FishRandomSelector.core.Views
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             App app = (App)Application.Current;
             Button p = (Button)sender;
-            switch(p.Name[7])
+            switch (p.Name[7])
             {
                 case '1':
                     app.IsReset = true;
@@ -64,7 +64,7 @@ namespace FishRandomSelector.core.Views
                     saveFileDialog.DefaultExt = ".txt";
                     saveFileDialog.Filter = "文本文件 |*.txt|无类型文本 |*.*|Fish名称名单 |*.fnamelist";
                     Nullable<bool> fileresult = saveFileDialog.ShowDialog();
-                    if(fileresult == true)
+                    if (fileresult == true)
                     {
                         File.Create(saveFileDialog.FileName);
                         StreamWriter writer = File.AppendText(saveFileDialog.FileName);
@@ -89,7 +89,7 @@ namespace FishRandomSelector.core.Views
                     return;
                 case '7':
                     app.IsReset = true;
-                    File.Delete("FishRandomSelector.xml");                    
+                    File.Delete("FishRandomSelector.xml");
                     MessageBox.Show("已重置，请手动重启FishRandomSelector");
                     Application.Current.Shutdown();
                     return;
@@ -104,7 +104,7 @@ namespace FishRandomSelector.core.Views
                     return;
             }
             Nullable<bool> result = fileDialog.ShowDialog();
-            if (result == true) PutNameList(fileDialog.FileNames.ToString());
+            if (result == true) PutNameList(fileDialog.FileName.ToString());
         }
         private void PutNameList(string filename)
         {
@@ -129,6 +129,7 @@ namespace FishRandomSelector.core.Views
             FishXmlWriter.AppendAttributeToElement((XmlElement)aname, "name", name);
             FishXmlWriter.AppendAttributeToElement((XmlElement)aname, "value", "50");
             FishXmlWriter.AppendChild(root, aname);
+            
         }
     }
 }

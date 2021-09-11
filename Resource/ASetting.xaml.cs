@@ -68,7 +68,7 @@ namespace FishRandomSelector.core.Resource
             CheckChangeEvent = EventManager.RegisterRoutedEvent("CheckChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<bool>), typeof(ASetting));
 
         }
-        private static void OnSettingNameChanged(DependencyObject sender , DependencyPropertyChangedEventArgs e)
+        private static void OnSettingNameChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
 
         }
@@ -78,7 +78,7 @@ namespace FishRandomSelector.core.Resource
         }
         private static void OnIsDefineChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            
+
         }
         private static void OnNameColorChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {

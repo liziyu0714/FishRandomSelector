@@ -32,7 +32,7 @@ namespace FishRandomSelector.Views
             EULA.Text = Info.Info.EULA;
         }
 
-        
+
 
         private void DoFirstUseWorks(object sender, RoutedEventArgs e)
         {
@@ -66,15 +66,15 @@ namespace FishRandomSelector.Views
             {
                 NextButton.IsEnabled = true;
                 Filepath.Text = fileDialog.FileName.ToString();
-                FileStream file = null ;
-                StreamReader filereader = null ;
+                FileStream file = null;
+                StreamReader filereader = null;
                 try
                 {
                     file = new FileStream(fileDialog.FileName.ToString(), FileMode.Open);
                     filereader = new StreamReader(file);
                     filecontext.Text = filereader.ReadToEnd();
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     filecontext.Text = ex.Message;
                 }
@@ -88,13 +88,13 @@ namespace FishRandomSelector.Views
         private void PutNameList()
         {
             string namelist = null;
-            filecontext.Dispatcher.Invoke(() => { namelist =(string) filecontext.Text.ToString().Clone(); });
-            string[] names = namelist.Split(new char[2] { ' ','\n' });
+            filecontext.Dispatcher.Invoke(() => { namelist = (string)filecontext.Text.ToString().Clone(); });
+            string[] names = namelist.Split(new char[2] { ' ', '\n' });
             XmlElement root = FishXmlWriter.CreateRootElement("FishRandomSelectorNameList");
             FishXmlWriter.CreateXmlDeclaration("1.0", "UTF-8", null);
-            foreach(string name in names)
+            foreach (string name in names)
             {
-                if(name!=null)
+                if (name != null)
                 {
                     PutAName(name, root);
                 }
@@ -102,7 +102,7 @@ namespace FishRandomSelector.Views
             FishXmlWriter.SavaXml("FishRandomSelectorNameList.xml");
             FishXmlWriter.ClearXml();
         }
-        private void PutAName(string name , XmlElement root)
+        private void PutAName(string name, XmlElement root)
         {
             XmlNode aname = FishXmlWriter.CreateElement("Name", "");
             FishXmlWriter.AppendAttributeToElement((XmlElement)aname, "name", name);
@@ -115,7 +115,7 @@ namespace FishRandomSelector.Views
             if (filecontext.Text != "")
                 PutNameList();
             else
-                MessageBox.Show(this,"请选择文件或手动输入","FishRandomSelector",MessageBoxButton.OK,MessageBoxImage.Warning);
+                MessageBox.Show(this, "请选择文件或手动输入", "FishRandomSelector", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         private void FinishFirstUseWorks(object sender, RoutedEventArgs e)
@@ -123,7 +123,11 @@ namespace FishRandomSelector.Views
             MainWindow main = new MainWindow();
             Application.Current.MainWindow = main;
             Application.Current.MainWindow.Show();
-            FishRandomSelector.core.Info.Names.ReadPeople();
+            try
+            {
+                FishRandomSelector.core.Info.Names.ReadPeople();
+            }
+            catch { }
             this.Close();
         }
     }

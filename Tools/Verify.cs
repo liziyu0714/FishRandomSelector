@@ -18,7 +18,7 @@ namespace FishRandomSelector.Tools
     }
     static class Verify
     {
-        
+
         public static Result Verify_Online()
         {
             Result result;/*

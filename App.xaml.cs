@@ -18,20 +18,26 @@ namespace FishRandomSelector
         public bool IsReset = false;
         private void Application_Exit(object sender, ExitEventArgs e)
         {
-            if(!IsReset)
+            if (!IsReset)
             {
                 FishRandomSelector.core.Info.Names.SavePeople();
                 FishRandomSelector.Settings.UISettings.SaveConfig();
             }
-           
+
         }
 
         private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
-            if(FishRandomSelector.Settings.UISettings.UseSystemDefaultErrorDialog)
+            if (FishRandomSelector.Settings.UISettings.UseSystemDefaultErrorDialog)
             {
                 MessageBox.Show("出现了一些奇怪的东西(未经处理的异常):" + e.Exception.Message, "出现了一点“小”问题", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            else
+            {
+                core.Views.ExceptionShower exception = new core.Views.ExceptionShower(e.Exception);
+                exception.ShowDialog();
+            }
+            this.Shutdown();
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using FishRandomSelector.Tools;
 using System;
 using System.Collections.Generic;
-using System.Xml;
 using System.Collections.ObjectModel;
+using System.Xml;
 
 namespace FishRandomSelector.core.Info
 {
@@ -27,7 +27,7 @@ namespace FishRandomSelector.core.Info
         private static int _size = 0;
         private static ObservableCollection<person> people = new ObservableCollection<person>();
         private static List<bool> IsSelected = new List<bool>();
-        public static void AddPerson(string name , int value)
+        public static void AddPerson(string name, int value)
         {
             people.Add(new person(name, value, ++_size));
             IsSelected.Add(false);
@@ -47,21 +47,21 @@ namespace FishRandomSelector.core.Info
         public static string GetARandomName()
         {
             Random random = new Random();
-            return people[random.Next(0, _size)].Name;
+            return people[random.Next(0, _size - 1)].Name;
         }
         public static string GetPersonByValue()
         {
             Random random = new Random();
             while (true)
             {
-                if(IsAllSelected())
+                if (IsAllSelected())
                 {
                     return "名单全部选择完毕,请清空";
                 }
                 for (int i = 0; i <= _size; i++)
                 {
                     int ARandomValue = random.Next(0, 100);
-                    if ((ARandomValue <= people[i].Value && IsSelected[i] != true)||people[i].Value==0)
+                    if ((ARandomValue <= people[i].Value && IsSelected[i] != true) || people[i].Value == 0)
                     {
                         IsSelected[i] = true;
                         if (people[i].Value != 0)
@@ -72,9 +72,9 @@ namespace FishRandomSelector.core.Info
                 }
             }
         }
-        public static bool IsAllSelected ()
+        public static bool IsAllSelected()
         {
-            foreach(bool p in IsSelected)
+            foreach (bool p in IsSelected)
             {
                 if (p == false) return false;
             }
@@ -85,13 +85,14 @@ namespace FishRandomSelector.core.Info
             Random random = new Random();
             List<person> p = new List<person>();
             int now = 0;
+            if (num == 0) return null;
             while (now < num)
             {
                 if (IsAllSelected())
                 {
                     return p;
                 }
-                for (int i = 0; i < _size; i++)
+                for (int i = 0; i <= _size; i++)
                 {
                     int ARandomValue = random.Next(0, 100);
                     if (ARandomValue <= people[i].Value && IsSelected[i] != true)
@@ -99,6 +100,7 @@ namespace FishRandomSelector.core.Info
                         IsSelected[i] = true;
                         p.Add(people[i]);
                         now++;
+                        break;
                     }
                 }
             }
@@ -140,7 +142,7 @@ namespace FishRandomSelector.core.Info
         {
             int valueInList;
             string nameInList;
-           // if (!System.IO.File.Exists("FishRandomSelectorNameList.xml")) throw new System.IO.FileNotFoundException("没有FishRandomSelectorNameList.xml文件");
+            // if (!System.IO.File.Exists("FishRandomSelectorNameList.xml")) throw new System.IO.FileNotFoundException("没有FishRandomSelectorNameList.xml文件");
             FishXmlReader.LoadXml("FishRandomSelectorNameList.xml");
             XmlNode node = FishXmlReader.GetXmlDocumentRoot();
             XmlNodeList nodeList = node.ChildNodes;
@@ -157,7 +159,7 @@ namespace FishRandomSelector.core.Info
         }
         public static void SavePeople()
         {
-            if(people.Count==0)
+            if (people.Count == 0)
             {
                 return;
             }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,10 +20,15 @@ namespace FishRandomSelector.core.Views
     /// </summary>
     public partial class ExceptionShower : Window
     {
-        public ExceptionShower()
+        public Exception exception;
+        public ExceptionShower(Exception ex)
         {
             InitializeComponent();
-           
+            exception = ex;
+            ExceptionName.Text += exception.GetType().ToString();
+            ExceptionDes.Text += exception.Message;
+            ExceptionStacks.Text += exception.StackTrace;
+            ExceptionLink.Text = exception.HelpLink;
         }
     }
 }

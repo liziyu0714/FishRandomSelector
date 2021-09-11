@@ -30,7 +30,7 @@ namespace FishRandomSelector.Settings
         ///出错时使用系统对话框
         ///</value>
         public static bool UseSystemDefaultErrorDialog = true;
-        public static int TimeBetweenChangeText =100;
+        public static int TimeBetweenChangeText = 100;
         public static int MaxChangeTextTimes = 20;
         public static int MinChangeTextTimes = 2;
         public static void ReadConfig()
@@ -42,7 +42,7 @@ namespace FishRandomSelector.Settings
             foreach (XmlNode anode in nodeList)
             {
 
-                switch(anode.Name)
+                switch (anode.Name)
                 {
                     case "CloseLeftAreaWhenClick": CloseLeftAreaWhenClick = bool.Parse(anode.Attributes.GetNamedItem("value").Value); break;
                     case "AlwaysSaveWhenEndEit": AlwaysSaveWhenEndEit = bool.Parse(anode.Attributes.GetNamedItem("value").Value); break;
@@ -56,7 +56,7 @@ namespace FishRandomSelector.Settings
         }
         public static void SaveConfig()
         {
-            XmlNode root =  FishXmlWriter.CreateRootElement("FishRandomSelectorConfig");
+            XmlNode root = FishXmlWriter.CreateRootElement("FishRandomSelectorConfig");
             FishXmlWriter.CreateXmlDeclaration("1.0", "UTF-8", null);
             PutAConfig("CloseLeftAreaWhenClick", CloseLeftAreaWhenClick.ToString(), root);
             PutAConfig("AlwaysSaveWhenEndEit", AlwaysSaveWhenEndEit.ToString(), root);
@@ -68,7 +68,7 @@ namespace FishRandomSelector.Settings
             FishXmlWriter.SavaXml("FishRandomSelector.xml");
             FishXmlWriter.ClearXml();
         }
-        public static void PutAConfig(string name , string value , XmlNode root)
+        public static void PutAConfig(string name, string value, XmlNode root)
         {
             XmlNode aConfig = FishXmlWriter.CreateElement(name, "");
             FishXmlWriter.AppendAttributeToElement((XmlElement)aConfig, "value", value);

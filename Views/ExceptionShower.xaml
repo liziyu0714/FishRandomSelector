@@ -5,8 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FishRandomSelector.core.Views"
         mc:Ignorable="d"
-        Title="出现了一点“小”问题" Height="250" Width="400">
+        Title="出现了一点“小”问题" Height="250" Width="400"
+        SizeToContent="WidthAndHeight">
     <StackPanel>
-        <Image x:Name="ErrorImg"></Image>
+        <TextBlock x:Name="ExceptionName">异常名称:</TextBlock>
+        <TextBlock x:Name="ExceptionDes" >异常的具体描述:</TextBlock>
+        <TextBlock x:Name="ExceptionLink">异常帮助链接(相信我，一般不会有):</TextBlock>
+        <TextBlock>详细信息(给了你也看不懂...):</TextBlock>
+        <TextBox x:Name="ExceptionStacks"></TextBox>
     </StackPanel>
 </Window>

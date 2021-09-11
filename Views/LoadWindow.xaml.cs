@@ -33,54 +33,54 @@ namespace FishRandomSelector.Views
         {
             App app = (App)Application.Current;
             #region 检测是否是第一次使用
-            if(!System.IO.File.Exists("FishRandomSelector.xml"))
+            if (!System.IO.File.Exists("FishRandomSelector.xml"))
             {
-            this.Dispatcher.Invoke(() =>
-                {
-                    FirstUse firstUse = new FirstUse();
-                    Application.Current.MainWindow = firstUse;
-                    Application.Current.MainWindow.Show();
-                    app.IsConfigFirstUse = true;
-                    this.Close();
-                });
+                this.Dispatcher.Invoke(() =>
+                    {
+                        FirstUse firstUse = new FirstUse();
+                        Application.Current.MainWindow = firstUse;
+                        Application.Current.MainWindow.Show();
+                        app.IsConfigFirstUse = true;
+                        this.Close();
+                    });
             }
             #endregion
             LoadInfo.Dispatcher.Invoke(() => { LoadInfo.Text = "正在验证应用可用性..."; });
             #region 验证应用可用性
             Tools.Result result = Tools.Verify.Verify_Online();
-            if(result.Can_use)
+            if (result.Can_use)
                 Check1.Dispatcher.Invoke(() => { Check2.IsChecked = true; });
             else
-                Check1.Dispatcher.Invoke(() => { Check2.IsChecked = false; Check2.Background = Brushes.Red;Check2.Content = "!"; });
+                Check1.Dispatcher.Invoke(() => { Check2.IsChecked = false; Check2.Background = Brushes.Red; Check2.Content = "!"; });
             #endregion
             LoadInfo.Dispatcher.Invoke(() => { LoadInfo.Text = "验证完成"; });
             try
-            { 
-                if(!System.IO.File.Exists("FishRandomSelectorNameList.xml"))
+            {
+                if (!System.IO.File.Exists("FishRandomSelectorNameList.xml"))
                 {
                     app.HavePeople = false;
                 }
                 FishRandomSelector.core.Info.Names.ReadPeople();
             }
             catch { }
-            Check1.Dispatcher.Invoke(() => { Check3.IsChecked = true; }); 
+            Check1.Dispatcher.Invoke(() => { Check3.IsChecked = true; });
             Check1.Dispatcher.Invoke(() => { Check4.IsChecked = true; });
-            if(!app.IsConfigFirstUse)
+            if (!app.IsConfigFirstUse)
                 this.Dispatcher.Invoke(() =>
                 {
                     Application.Current.MainWindow = main;
                     Application.Current.MainWindow.Show();
                     this.Close();
                 });
-            
+
         }
 
         private void WindowLoaded(object sender, RoutedEventArgs e)
         {
             LoadAndChangeText = new Thread(LoadWindow_OtherThread);
             LoadAndChangeText.Start();
-            
-            
+
+
         }
     }
 }

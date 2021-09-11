@@ -13,7 +13,7 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="MainWindow" Height="450" Width="800" Loaded="MainWindowLoaded" WindowStartupLocation="CenterScreen">
+        Title="FishRandomSelector-主窗口" Height="450" Width="800" Loaded="MainWindowLoaded" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -79,7 +79,7 @@
                 </Grid>
             </materialDesign:DialogHost.DialogContent>
         </materialDesign:DialogHost>
-        <materialDesign:Flipper Grid.Row="0" Grid.Column="2" Grid.RowSpan="2">
+        <materialDesign:Flipper x:Name="MainFlipper" Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" IsFlippedChanged="MainFlipper_IsFlippedChanged">
             <materialDesign:Flipper.FrontContent>
                 <materialDesign:Card Grid.Row="0" Grid.Column="2" Background="#03a9f4" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Padding="0" Grid.RowSpan="2">
                     <Grid>
@@ -111,8 +111,8 @@
                             </Button>
                             <materialDesign:PopupBox HorizontalAlignment="Right" Padding="2 0 2 0">
                                 <StackPanel>
-                                    <Button Content="提高概率" />
-                                    <Button Content="降低概率" />
+                                    <Button Content="提高概率" Click="Addp"  />
+                                    <Button Content="降低概率" Click="Subp"  />
                                     <Button Content="清空已选择的名单" Click="ClearIsSelected"/>
                                     <CheckBox IsChecked="True" Content="启用动画" x:Name="IsUsingAnimation" Click="ChangeUseAnimation"/>
                                 </StackPanel>
@@ -135,7 +135,7 @@
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
-                            <ListBox Grid.Column="0" Background="White">
+                            <ListBox x:Name="MorePeopleNameList" Grid.Column="0" Background="White">
                             </ListBox>
                             <Separator
                     Grid.Column="1"
@@ -148,7 +148,7 @@
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
                                 <TextBlock
-                   
+                   x:Name="MorePeopleText"
                     Style="{StaticResource MaterialDesignHeadline1TextBlock}"
                     Text="..." HorizontalAlignment="Center" VerticalAlignment="Center"  />
                                 <Separator
@@ -157,7 +157,7 @@
                     Style="{StaticResource MaterialDesignLightSeparator}" />
                                 <Slider
                                     x:Name="PeopleCount"
-                                    Minimum="0"
+                                    Minimum="1"
                                     Maximum="50"
                                     Value="0"
                                     TickFrequency="5"/>
@@ -225,14 +225,14 @@
                     <TextBlock>抽取</TextBlock>
                 </Viewbox>
             </Button>
-            <Button Grid.Column="0"
-                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Width="60" Height="60" >
+            <Button Grid.Column="0" 
+                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Width="60" Height="60" Click="PreSelectedPerson" >
                 <materialDesign:PackIcon
                     Kind="ArrowLeft" Height="40" Width="40"
                  />
             </Button>
             <Button Grid.Column="2"
-                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Width="60" Height="60" >
+                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Width="60" Height="60" Click="NextSelectedPerson" >
                 <materialDesign:PackIcon
                     Kind="ArrowRight" Height="40" Width="40"
                  />

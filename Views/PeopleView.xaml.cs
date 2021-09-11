@@ -33,17 +33,18 @@ namespace FishRandomSelector.core.Views
         private void LoadPeople(object sender, RoutedEventArgs e)
         {
             try
-            { 
+            {
                 ShowPersonGrid.DataContext = Names.GetPerson(0);
                 NoNameListMessage.IsActive = false;
                 NameList.ItemsSource = Names.GetAllPeople();
             }
-            catch (Exception ex) 
-            { 
-                prewBtn.IsEnabled = nextBtn.IsEnabled = RefreshButton.IsEnabled = IsEditMode.IsEnabled =false;
+            catch (Exception ex)
+            {
+                prewBtn.IsEnabled = nextBtn.IsEnabled = RefreshButton.IsEnabled = IsEditMode.IsEnabled = false;
                 App app = (App)Application.Current;
                 app.HavePeople = false;
-                textMessage.Text = "暂无名单可供编辑，错误信息:" + ex.Message; }
+                textMessage.Text = "暂无名单可供编辑，错误信息:" + ex.Message;
+            }
         }
 
         private void Prewperson(object sender, RoutedEventArgs e)
@@ -53,7 +54,7 @@ namespace FishRandomSelector.core.Views
         }
         private void Nextperson(object sender, RoutedEventArgs e)
         {
-            if (nowID < Names.size  ) nowID++;
+            if (nowID < Names.size) nowID++;
             ShowPersonGrid.DataContext = Names.GetPerson(nowID);
         }
 
@@ -70,7 +71,7 @@ namespace FishRandomSelector.core.Views
             {
                 NameEdit.IsReadOnly = true;
                 ValueEdit.IsReadOnly = true;
-                if(Settings.UISettings.AlwaysSaveWhenEndEit)
+                if (Settings.UISettings.AlwaysSaveWhenEndEit)
                     Names.SavePeople();
                 AddButton.IsEnabled = false;
                 DelButton.IsEnabled = false;
@@ -120,7 +121,7 @@ namespace FishRandomSelector.core.Views
                 if (num > Names.size) throw new Exception("超出范围");
                 errorMessage.Text = "";
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 errorMessage.Text = ex.Message;
             }
@@ -128,7 +129,7 @@ namespace FishRandomSelector.core.Views
 
         private void JumpToFinishButton_Click(object sender, RoutedEventArgs e)
         {
-            if(errorMessage.Text == "")
+            if (errorMessage.Text == "")
             {
                 nowID = int.Parse(NumJumpTo.Text);
                 ShowPersonGrid.DataContext = Names.GetPerson(nowID);
@@ -143,8 +144,8 @@ namespace FishRandomSelector.core.Views
         private void NameList_Selected(object sender, RoutedEventArgs e)
         {
             person p = (person)NameList.SelectedItem;
-            if(p!=null)
-                nowID=p.ID;
+            if (p != null)
+                nowID = p.ID;
             ShowPersonGrid.DataContext = Names.GetPerson(nowID);
         }
 
